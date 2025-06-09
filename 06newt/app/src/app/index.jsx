@@ -11,7 +11,11 @@ export default function Index() {
      </Pressable>
      <Pressable style={styles.botao} onPress={() => router.push('/telaB')}>
           <Text style={styles.texto}>Ir para Tela B</Text>
-        </Pressable>
+      </Pressable>
+
+      <Pressable style={styles.botao} onPress={() => router.push('/telaC')}>
+        <Text style={styles.texto}>Ir para Tela C</Text>
+      </Pressable>
          
         <Text>Entrar</Text>
      
