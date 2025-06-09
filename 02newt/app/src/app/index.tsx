@@ -1,5 +1,18 @@
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import  { useState,useEffect,useRef } from "react";
+import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 export default function Index() {
+    const [timeLeft,  setTimeLeft ]   = useState(10);
+    const [timeLabel, setTimeLabel]   = useState('start');
+    const [isRunning, setIsRunning]   = useState(false);
+    
+    function startTimer() {
+      if (!isRunning && timeLeft > 0) {
+        setIsRunning(true);
+        setTimeLabel('stop') 
+      } else {  
+        setIsRunning(false);
+        setTimeLabel("Começar");
+    }}
     return (
         <View style={style.container}>
           <View>
@@ -10,17 +23,17 @@ export default function Index() {
           />
         </View>
         <View style={style.actions}>
-          <Text style={style.timer}>20:00</Text>
-            <Pressable style={style.button}>
-                <Text style={style.textButton}>Pressione-me</Text>
+          <Text style={style.timer}>{timeLeft}</Text>
+            <Pressable style={isRunning ? style.buttonStop : style.buttonStart}
+                onPress={startTimer}>
+
+                <Text style={style.textButton}>{timeLabel}</Text>
             </Pressable>
         </View>
         <View style={style.footer}>
             <Text style={style.textfooter}>Curso de react Native EAD</Text>
             <Text style={style.textfooter}>2025 Meu App</Text>
-        </View>
-
-            
+         </View>         
         </View>
     );
 }
@@ -37,6 +50,11 @@ const style = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
     },
+    timer: {
+        fontSize: 54,
+        fontWeight: "bold",
+        color: "#FFF",
+        textAlign: "center"},
     actions: {
         padding: 24,
         backgroundColor: "#14448080",
@@ -46,17 +64,11 @@ const style = StyleSheet.create({
         borderColor: "#144480",
         alignItems: "center",
         gap: 40,
+        
     },
-    timer: {
-        fontSize: 54,
-        color: "#FFF",
-        fontWeight: "bold",
-        textAlign: "center"
-    },
-    
   button: {
-      padding: 24,
         backgroundColor: "#B872ff",
+        padding: 16,
         borderRadius: 32,
         marginTop: 12,
     },
@@ -74,5 +86,19 @@ const style = StyleSheet.create({
     textfooter: {
         fontSize: 18,
         color: "#333",
+    },
+    buttonStop:{
+        backgroundColor: "#B872ff",
+        padding: 16,
+        borderRadius: 32,
+        marginTop: 12,
+        width: 200,
+    },
+    buttonStart:{
+        backgroundColor: "#FF0000",
+        padding: 16,
+        borderRadius: 32,
+        marginTop: 12,
+        width: 200,
     },
     });
