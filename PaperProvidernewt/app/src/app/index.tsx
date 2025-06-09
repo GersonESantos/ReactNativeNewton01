@@ -1,104 +1,53 @@
-import  { useState,useEffect,useRef } from "react";
-import { Image, StyleSheet, Text, View, Pressable } from "react-native";
-export default function Index() {
-    const [timeLeft,  setTimeLeft ]   = useState(10);
-    const [timeLabel, setTimeLabel]   = useState('start');
-    const [isRunning, setIsRunning]   = useState(false);
-    
-    function startTimer() {
-      if (!isRunning && timeLeft > 0) {
-        setIsRunning(true);
-        setTimeLabel('stop') 
-      } else {  
-        setIsRunning(false);
-        setTimeLabel("Começar");
-    }}
-    return (
-        <View style={style.container}>
-          <View>
-            <Image source={{
-            uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
-          }}
-          style={{width: 200, height: 200}}
-          />
-        </View>
-        <View style={style.actions}>
-          <Text style={style.timer}>{timeLeft}</Text>
-            <Pressable style={isRunning ? style.buttonStop : style.buttonStart}
-                onPress={startTimer}>
+// App.js
+import React from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { DefaultTheme, configureFonts } from 'react-native-paper';
+import { StyleSheet, View, Text } from 'react-native';
+import { Button } from 'react-native-paper';
 
-                <Text style={style.textButton}>{timeLabel}</Text>
-            </Pressable>
-        </View>
-        <View style={style.footer}>
-            <Text style={style.textfooter}>Curso de react Native EAD</Text>
-            <Text style={style.textfooter}>2025 Meu App</Text>
-         </View>         
-        </View>
-    );
+// Configuração personalizada do tema (opcional)
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#6200ee', // Cor primária personalizada
+    accent: '#03dac4',  // Cor de destaque personalizada
+  },
+};
+
+export default function App() {
+  return (
+    // Envolve o aplicativo com PaperProvider
+    <PaperProvider theme={theme}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Exemplo com React Native Paper</Text>
+        {/* Exemplo de uso de um componente do React Native Paper */}
+        <Button 
+          mode="contained" 
+          onPress={() => alert('Botão pressionado!')}
+          style={styles.button}
+        >
+          Clique Aqui
+        </Button>
+      </View>
+    </PaperProvider>
+  );
 }
-const style = StyleSheet.create({
-    container: { 
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#021123",
-        gap: 40,    
-        },
-    title :{ 
-        color: "red", 
-        fontSize: 24,
-        fontWeight: "bold",
-    },
-    timer: {
-        fontSize: 54,
-        fontWeight: "bold",
-        color: "#FFF",
-        textAlign: "center"},
-    actions: {
-        padding: 24,
-        backgroundColor: "#14448080",
-        width: "80%",
-        borderRadius: 32,
-        borderWidth: 2,
-        borderColor: "#144480",
-        alignItems: "center",
-        gap: 40,
-        
-    },
+
+// Estilos básicos
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+  title: {
+    fontSize: 20,
+    marginBottom: 20,
+    fontWeight: 'bold',
+  },
   button: {
-        backgroundColor: "#B872ff",
-        padding: 16,
-        borderRadius: 32,
-        marginTop: 12,
-    },
-    textButton: {
-      alignItems: "center",
-        color: "#FFF",    
-        fontSize: 16,
-        fontWeight: "bold",
-        textAlign: "center",  
-    },
-    footer: {
-        marginTop: 24,
-        alignItems: "center",
-    },
-    textfooter: {
-        fontSize: 18,
-        color: "#333",
-    },
-    buttonStop:{
-        backgroundColor: "#B872ff",
-        padding: 16,
-        borderRadius: 32,
-        marginTop: 12,
-        width: 200,
-    },
-    buttonStart:{
-        backgroundColor: "#FF0000",
-        padding: 16,
-        borderRadius: 32,
-        marginTop: 12,
-        width: 200,
-    },
-    });
+    marginTop: 10,
+  },
+});
